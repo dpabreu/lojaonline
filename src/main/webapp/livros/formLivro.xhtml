@@ -26,6 +26,16 @@
 			<h:inputText value="#{adminLivrosBean.livro.preco}"/>
 		</div>
 		
+		<div>
+			<h:selectManyListbox values="#{adminLivrosBean.autoresId}" converter="javax.faces.Integer">
+				<f:selectItems value="#{adminLivrosBean.autores}"
+					var="autor"
+					itemValue="#{autor.id}"
+					itemLabel="#{autor.nome}"/>
+			</h:selectManyListbox>
+		
+		</div>
+		
 		<h:commandButton value="Salvar" action="#{adminLivrosBean.salvar}"/>
 	</h:form>
 

@@ -1,11 +1,16 @@
 package br.com.casadocodigo.loja.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 
+import br.com.casadocodigo.loja.daos.AutorDao;
 import br.com.casadocodigo.loja.daos.LivroDao;
+import br.com.casadocodigo.loja.models.Autor;
 import br.com.casadocodigo.loja.models.Livro;
 
 @Named
@@ -14,8 +19,13 @@ public class AdminLivrosBean {
 	
 	private Livro livro = new Livro();
 	
+	private List<Integer> autoresId = new ArrayList<>();
+	
 	@Inject
 	private LivroDao livroDao;
+	
+	@Inject
+	private AutorDao autorDao;
 	
 	public Livro getLivro() {
 		return livro;
@@ -27,7 +37,28 @@ public class AdminLivrosBean {
 
 	@Transactional
 	public void salvar() {
+		
+		for(Integer autorId : autoresId){
+			livro.getAutores().add(new Autor(autorId));
+		}
+		
 		System.out.println("Livro cadastrado com sucesso." + livro);
 		livroDao.salvar(livro);
+		
+	    this.livro = new Livro();
+	    this.autoresId = new ArrayList<>();		
+	}
+	
+	public List<Autor> getAutores(){
+		
+		return autorDao.listar();
+	}
+
+	public List<Integer> getAutoresId() {
+		return autoresId;
+	}
+
+	public void setAutoresId(List<Integer> autoresId) {
+		this.autoresId = autoresId;
 	}
 }
