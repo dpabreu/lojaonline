@@ -17,11 +17,6 @@ public class Autor {
 	public Autor(){
 		
 	}
-	
-	public Autor(Integer id, String nome) {
-		this.id = id;
-		this.nome = nome;
-	}
 
 	public Autor(Integer autorId) {
 		id = autorId;
