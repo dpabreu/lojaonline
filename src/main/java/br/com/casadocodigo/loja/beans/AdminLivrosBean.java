@@ -1,6 +1,5 @@
 package br.com.casadocodigo.loja.beans;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -20,8 +19,6 @@ import br.com.casadocodigo.loja.models.Livro;
 public class AdminLivrosBean {
 	
 	private Livro livro = new Livro();
-	
-	private List<Integer> autoresId = new ArrayList<>();
 	
 	@Inject
 	private LivroDao livroDao;
@@ -43,11 +40,6 @@ public class AdminLivrosBean {
 	@Transactional
 	public String salvar() {
 		
-		for(Integer autorId : autoresId){
-			livro.getAutores().add(new Autor(autorId));
-		}
-		
-		System.out.println("Livro cadastrado com sucesso." + livro);
 		livroDao.salvar(livro);
 		
 		context.getExternalContext().getFlash().setKeepMessages(true);
@@ -59,13 +51,5 @@ public class AdminLivrosBean {
 	public List<Autor> getAutores(){
 		
 		return autorDao.listar();
-	}
-
-	public List<Integer> getAutoresId() {
-		return autoresId;
-	}
-
-	public void setAutoresId(List<Integer> autoresId) {
-		this.autoresId = autoresId;
 	}
 }
