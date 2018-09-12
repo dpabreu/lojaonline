@@ -45,8 +45,8 @@ public class AdminLivrosBean {
 	@Transactional
 	public String salvar() throws IOException {
 		
-		FileSaver fileServer = new FileSaver();
-		livro.setCapaPath(fileServer.write(capaLivro, "livros"));
+		FileSaver fileSaver = new FileSaver();
+		livro.setCapaPath(fileSaver.write(capaLivro, "livros"));
 		
 		livroDao.salvar(livro);
 		
