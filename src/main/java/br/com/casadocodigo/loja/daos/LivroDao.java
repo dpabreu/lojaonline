@@ -38,4 +38,9 @@ public class LivroDao {
 		return manager.createQuery(jpql, Livro.class).setFirstResult(5).getResultList();
 	}
 
+
+	public Livro buscaPorId(Integer id) {
+		return manager.find(Livro.class, id);
+	}
+
 }
