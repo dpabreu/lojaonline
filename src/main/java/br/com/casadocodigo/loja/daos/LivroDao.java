@@ -40,7 +40,8 @@ public class LivroDao {
 
 
 	public Livro buscaPorId(Integer id) {
-		return manager.find(Livro.class, id);
+		String jpql = "select l from Livro l join fetch l.autores where l.id = :id";
+		return manager.createQuery(jpql, Livro.class).setParameter("id", id).getSingleResult();
 	}
 
 }
