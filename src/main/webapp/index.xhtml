@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui">
+	
 	
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
@@ -209,48 +211,49 @@
 
 <main>
 		
+<o:cache>	
+	<section class="vitrineDestaquinho container">
+		<h2 class="vitrineDestaquinho-titulo">Últimos lançamentos</h2>
+		<ul class="vitrineDestaquinho-lista">
+			
+			<ui:repeat var="livro" value="#{homeBean.ultimosLancamentos()}">
+				<li class="livroNaVitrine vitrineDestaquinho-produto">
+					<a href="#{request.contextPath}/livro-detalhe.xhtml?id=#{livro.id}" class="livroNaVitrine-link"
+							title="#{livro.titulo}">
+						<div class="livroNaVitrine-imagemContainer" role="presentation">
+							<img class="livroNaVitrine-imagem" 
+								src="#{request.contextPath}/file/#{livro.capaPath}" 
+									alt="#{livro.titulo}" title="#{livro.titulo}" />
+						</div>
+						<span class="livroNaVitrine-nome">#{livro.titulo}</span>
+					</a>
+				</li>
+			</ui:repeat>
+		</ul>
+	</section>
 	
-<section class="vitrineDestaquinho container">
-	<h2 class="vitrineDestaquinho-titulo">Últimos lançamentos</h2>
-	<ul class="vitrineDestaquinho-lista">
-		
-		<ui:repeat var="livro" value="#{homeBean.ultimosLancamentos()}">
-			<li class="livroNaVitrine vitrineDestaquinho-produto">
-				<a href="#{request.contextPath}/livro-detalhe.xhtml?id=#{livro.id}" class="livroNaVitrine-link"
+	
+	<h3 class="homeCall container">Todos os nossos livros</h3>
+	
+	<section class="vitrineDaColecao container">
+		<ul class="vitrineDaColecao-lista">
+			<ui:repeat var="livro" value="#{homeBean.demaisLivros()}">
+				<li class="livroNaVitrine vitrineDaColecao-produto">
+					<a href="#{request.contextPath}/livro-detalhe.xhtml?id=#{livro.id}" class="livroNaVitrine-link" 
 						title="#{livro.titulo}">
-					<div class="livroNaVitrine-imagemContainer" role="presentation">
-						<img class="livroNaVitrine-imagem" 
-							src="#{request.contextPath}/file/#{livro.capaPath}" 
+						<div class="livroNaVitrine-imagemContainer" role="presentation">
+							<img class="livroNaVitrine-imagem" 
+								src="#{request.contextPath}/file/#{livro.capaPath}" 
 								alt="#{livro.titulo}" title="#{livro.titulo}" />
-					</div>
-					<span class="livroNaVitrine-nome">#{livro.titulo}</span>
-				</a>
-			</li>
-		</ui:repeat>
-	</ul>
-</section>
-
-
-<h3 class="homeCall container">Todos os nossos livros</h3>
-
-<section class="vitrineDaColecao container">
-	<ul class="vitrineDaColecao-lista">
-		<ui:repeat var="livro" value="#{homeBean.demaisLivros()}">
-			<li class="livroNaVitrine vitrineDaColecao-produto">
-				<a href="#{request.contextPath}/livro-detalhe.xhtml?id=#{livro.id}" class="livroNaVitrine-link" 
-					title="#{livro.titulo}">
-					<div class="livroNaVitrine-imagemContainer" role="presentation">
-						<img class="livroNaVitrine-imagem" 
-							src="#{request.contextPath}/file/#{livro.capaPath}" 
-							alt="#{livro.titulo}" title="#{livro.titulo}" />
-					</div>
-					<span class="livroNaVitrine-nome">#{livro.titulo}</span>
-				</a>
-			</li>
-		</ui:repeat>
-		
-	</ul>
-</section>
+						</div>
+						<span class="livroNaVitrine-nome">#{livro.titulo}</span>
+					</a>
+				</li>
+			</ui:repeat>
+			
+		</ul>
+	</section>
+</o:cache>
 
 
 		<div class="buscaDoRodape container" role="presentation">

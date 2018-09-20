@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.hibernate.jpa.QueryHints;
+
 import br.com.casadocodigo.loja.models.Livro;
 
 public class LivroDao {
@@ -28,14 +30,20 @@ public class LivroDao {
 	public List<Livro> ultimosLancamentos() {
 		String jpql = "select l from Livro l order by l.id desc";
 		
-		return manager.createQuery(jpql, Livro.class).setMaxResults(5).getResultList();
+		return manager.createQuery(jpql, Livro.class)
+				.setMaxResults(5)
+				.setHint(QueryHints.HINT_CACHEABLE, true)
+				.getResultList();
 	}
 
 
 	public List<Livro> demaisLivros() {
 		String jpql = "select l from Livro l order by l.id desc";
 		
-		return manager.createQuery(jpql, Livro.class).setFirstResult(5).getResultList();
+		return manager.createQuery(jpql, Livro.class)
+				.setFirstResult(5)
+				.setHint(QueryHints.HINT_CACHEABLE, true)
+				.getResultList();
 	}
 
 
