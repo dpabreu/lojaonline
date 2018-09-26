@@ -28,7 +28,7 @@ public class LivroDao {
 
 
 	public List<Livro> ultimosLancamentos() {
-		String jpql = "select l from Livro l order by l.id desc";
+		String jpql = "select l from Livro l join fetch l.autores order by l.id desc";
 		
 		return manager.createQuery(jpql, Livro.class)
 				.setMaxResults(5)

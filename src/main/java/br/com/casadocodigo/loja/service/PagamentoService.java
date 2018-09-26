@@ -4,7 +4,11 @@ import java.net.URI;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.jms.Destination;
+import javax.jms.JMSContext;
+import javax.jms.JMSProducer;
 import javax.servlet.ServletContext;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -31,13 +35,22 @@ public class PagamentoService {
 	@Inject
 	private PagamentoGetway pagamentoGetway;
 	
+	@Inject
+	private JMSContext jmsContext;
+
+	@Resource(name="java:/jms/topics/CarrinhoComprasTopico")
+	private Destination destination;
+	
 	private static ExecutorService executor = Executors.newFixedThreadPool(50);
 	
 	@POST
 	public void pagar(@Suspended AsyncResponse ar, @QueryParam("uuid") String uuid) {
 	
 		Compras compra = compraDao.buscaPorUuid(uuid);
-		String contextPath = context.getContextPath(); 
+		String contextPath = context.getContextPath();
+		
+		JMSProducer jmsProducer = jmsContext.createProducer();
+		
 		executor.submit(() -> {
 			try {
 				pagamentoGetway.pagar(compra.getTotal());
@@ -47,6 +60,9 @@ public class PagamentoService {
 						.queryParam("msg", "Compra realizada com sucesso").build();
 				
 				Response response = Response.seeOther(responseUri).build();
+				
+				jmsProducer.send(destination, compra.getUuid());
+				
 				ar.resume(response);
 				
 			} catch (Exception e) {
