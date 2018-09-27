@@ -11,58 +11,49 @@
 	<h:outputStylesheet  library="css" name="style-admin.css"/>
 </h:head>
 
-<h:body >
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Casa do Código</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Lista</a></li>
-            <li><h:link value="Cadastro" outcome="formLivro"/></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
 
-	<div class="container">
+<ui:composition template="/templates/_admin_template.xhtml">
+
+	<ui:param name="lista" value="active" />
+	
+
+	<ui:define name="body">
 		<h1>Lista de Livros</h1>
 		
 		<div>Bem vindo, #{currentUser.get().email}</div>
-	<h:messages />
-	
-	<h:dataTable var="livro" value="#{adminListaLivrosBean.livros}" 
-		class="table table-bordered table-striped table-hover">
-		<h:column>
-			<f:facet name="header">Título</f:facet>
-			#{livro.titulo}
-		</h:column>
-		<h:column>
-			<f:facet name="header">Descrição</f:facet>
-			#{livro.descricao}
-		</h:column>
-		<h:column>
-			<f:facet name="header">Páginas</f:facet>
-			#{livro.numeroPaginas}
-		</h:column>
-		<h:column>
-			<f:facet name="header">Preço</f:facet>
-			#{livro.preco}
-		</h:column>
-		<h:column>
-            <f:facet name="header">Autores</f:facet>
-            <ui:repeat value="#{livro.autores}" var="autor">
-                #{autor.nome},
-            </ui:repeat>
-		</h:column>
+		<h:messages />
 		
-		<h:column>
-		    <f:facet name="header">Capa</f:facet>
-		    <img src="#{request.contextPath}/file/#{livro.capaPath}"
-		        height="30%" alt="#{livro.titulo}" />
-		</h:column>
-	</h:dataTable>
-	</div>
-</h:body>
+		<h:dataTable var="livro" value="#{adminListaLivrosBean.livros}" 
+			class="table table-bordered table-striped table-hover">
+			<h:column>
+				<f:facet name="header">Título</f:facet>
+				#{livro.titulo}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Descrição</f:facet>
+				#{livro.descricao}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Páginas</f:facet>
+				#{livro.numeroPaginas}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Preço</f:facet>
+				#{livro.preco}
+			</h:column>
+			<h:column>
+	            <f:facet name="header">Autores</f:facet>
+	            <ui:repeat value="#{livro.autores}" var="autor">
+	                #{autor.nome},
+	            </ui:repeat>
+			</h:column>
+			
+			<h:column>
+			    <f:facet name="header">Capa</f:facet>
+			    <img src="#{request.contextPath}/file/#{livro.capaPath}"
+			        height="30%" alt="#{livro.titulo}" />
+			</h:column>
+		</h:dataTable>
+	</ui:define>
+</ui:composition>
 </html>
