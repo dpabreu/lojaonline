@@ -423,7 +423,7 @@
 	canalDePromos.onmessage = function(message){
 		var novaPromo = JSON.parse(message.data);
 		if(confirm("Que tal aproveitar a promoção relâmpago " + novaPromo.titulo)){
-			document.location.href="#{request.contextPath}/livro-detalhe.xhtml?id=" + novaPromo.Id;
+			document.location.href="#{request.contextPath}/livro-detalhe.xhtml?id=" + novaPromo.livroId;
 		}
 	}
 	

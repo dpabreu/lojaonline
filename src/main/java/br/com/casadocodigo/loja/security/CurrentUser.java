@@ -43,7 +43,7 @@ public class CurrentUser {
 		
 		request.getSession().invalidate();
 		
-		return "/livros/listaLivro.xhtml?faces-redirect=true";
+		return "admin/livros/listaLivro.xhtml?faces-redirect=true";
 		
 	}
 }

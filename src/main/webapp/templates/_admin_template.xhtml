@@ -20,8 +20,12 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-				        <li class="#{lista}"><h:link value="Lista" outcome="listaLivro" /></li>
-				        <li class="#{cadastro}"><h:link value="Cadastro" outcome="formLivro" /></li>
+				        <li class="#{lista}">
+				        	<h:link value="Lista" outcome="/admin/livros/listaLivro" /></li>
+				        <li class="#{cadastro}">
+				        	<h:link value="Cadastro" outcome="/admin/livros/formLivro" /></li>
+				        <li class="#{promos}">
+				        	<h:link value="Promoções" outcome="/admin/promo" /></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="pad">
