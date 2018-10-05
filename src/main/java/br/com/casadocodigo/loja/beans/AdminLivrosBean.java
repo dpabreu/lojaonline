@@ -23,6 +23,9 @@ public class AdminLivrosBean {
 	
 	private Livro livro = new Livro();
 	
+	private Integer id;
+	
+
 	@Inject
 	private LivroDao livroDao;
 	
@@ -33,6 +36,13 @@ public class AdminLivrosBean {
 	private FacesContext context;
 	
 	private Part capaLivro;
+
+	public void carregaLivro() {
+		if(id!=null) {
+			this.setLivro(livroDao.buscaPorId(id));
+			System.out.println("Livro : " + this.livro.toString());
+		}
+	}
 	
 	public Livro getLivro() {
 		return livro;
@@ -40,6 +50,14 @@ public class AdminLivrosBean {
 
 	public void setLivro(Livro livro) {
 		this.livro = livro;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Transactional

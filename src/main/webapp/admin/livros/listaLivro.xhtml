@@ -20,14 +20,14 @@
 	<ui:define name="body">
 		<h1>Lista de Livros</h1>
 		
-		<div>Bem vindo, #{currentUser.get().email}</div>
 		<h:messages />
 		
 		<h:dataTable var="livro" value="#{adminListaLivrosBean.livros}" 
 			class="table table-bordered table-striped table-hover">
 			<h:column>
+				
 				<f:facet name="header">Título</f:facet>
-				#{livro.titulo}
+				<a href="#{request.contextPath}/admin/livros/formLivro.xhtml?id=#{livro.id}"> #{livro.titulo}</a> 
 			</h:column>
 			<h:column>
 				<f:facet name="header">Descrição</f:facet>

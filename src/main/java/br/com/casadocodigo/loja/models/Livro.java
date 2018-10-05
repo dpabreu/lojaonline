@@ -115,7 +115,7 @@ public class Livro {
 	@Override
 	public String toString() {
 		return "Livro [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", preco=" + preco
-				+ ", numeroPaginas=" + numeroPaginas + ", autores=" + autores + "]";
+				+ ", numeroPaginas=" + numeroPaginas + ", autores=" + autores + ", capaPath=" + capaPath + "]";
 	}
 
 	public Calendar getDataPublicacao() {
